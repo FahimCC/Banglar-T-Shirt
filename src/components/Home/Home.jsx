@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useLoaderData } from 'react-router-dom';
+import Cart from '../Cart/Cart';
 import TShirt from '../TShirt/TShirt';
 import './Home.css';
+
+//Context API
+// export const ContextData = createContext([
+// 	product,
+// 	totalPrice,
+// 	handleRemoveFromCart,
+// ]);
 
 const Home = () => {
 	const tShirts = useLoaderData();
@@ -47,39 +55,17 @@ const Home = () => {
 					</div>
 				</div>
 				<div className='cart-container'>
-					<h3>Shopping Cart</h3>
-					<div className='cart'>
-						{/* <p>Product selected: {selectedProduct}</p> */}
-						<p>Product selected: {product.length}</p>
-						<p>Total price: {totalPrice}</p>
-					</div>
-					<h3>Product List</h3>
-					<div className='center red'>{message}</div>
-					<div>
-						<ol>
-							{product.map(pd => (
-								<li key={pd._id}>
-									<div className='close'>
-										<span>{pd.name}</span>
-										<button
-											onClick={() => handleRemoveFromCart(pd._id, pd.price)}
-											className='close-btn'
-										>
-											x
-										</button>
-									</div>
-								</li>
-							))}
-						</ol>
-					</div>
-					<div
-						className={`center ${product.length === 1 && 'yellow'} ${
-							product.length >= 2 && 'green'
-						} `}
+					{/* <ContextData.Provider
+						value={[product, totalPrice, handleRemoveFromCart]}
 					>
-						{product.length === 1 && 'Buy one more...'}
-						{product.length >= 2 && 'Buy one more product please...'}
-					</div>
+						<Cart />
+					</ContextData.Provider> */}
+
+					<Cart
+						product={product}
+						totalPrice={totalPrice}
+						handleRemoveFromCart={handleRemoveFromCart}
+					/>
 				</div>
 			</div>
 		</div>
